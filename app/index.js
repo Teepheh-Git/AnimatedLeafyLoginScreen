@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window')
 
 const {
   Value,
@@ -53,6 +53,8 @@ class LoginApp extends Component {
   constructor() {
     super();
 
+    
+
     this.buttonOpacity = new Value(1);
 
     this.onStateChange = event([
@@ -65,7 +67,8 @@ class LoginApp extends Component {
             )
           ])
       }
-    ]);
+    ]);        
+
 
     this.buttonY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
