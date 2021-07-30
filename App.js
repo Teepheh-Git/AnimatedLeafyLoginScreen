@@ -14,7 +14,6 @@ function cacheImages(images) {
     }
   });
 }
-  
 
 
 export default class App extends React.Component {

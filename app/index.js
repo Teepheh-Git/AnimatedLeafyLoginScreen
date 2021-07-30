@@ -204,7 +204,6 @@ class LoginApp extends Component {
           </Animated.View>
 
 
-
         </View>
       </View>
     );
@@ -222,11 +221,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     height: 70,
     marginHorizontal: 20,
-    borderRadius: 15,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 5,
-    shadowOffset: { width: 2, height: 2 },
+    shadowOffset: {width: 2, height: 2},
     shadowColor: '#B7131E',
     shadowOpacity: 0.2
   },
@@ -246,7 +245,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 50,
-    borderRadius: 15,
+    borderRadius: 10,
     borderWidth: 0.5,
     marginHorizontal: 20,
     paddingLeft: 10,
