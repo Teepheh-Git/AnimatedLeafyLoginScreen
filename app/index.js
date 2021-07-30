@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
-import Animated, { Easing } from 'react-native-reanimated';
-import Svg, { Image, Circle, ClipPath } from 'react-native-svg';
-import { TapGestureHandler, State } from 'react-native-gesture-handler';
-const { width, height } = Dimensions.get('window')
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Dimensions, TextInput} from 'react-native';
+import Animated, {Easing} from 'react-native-reanimated';
+import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
+import {TapGestureHandler, State} from 'react-native-gesture-handler';
+
+const {width, height} = Dimensions.get('window')
 
 const {
   Value,
@@ -51,6 +52,7 @@ function runTiming(clock, value, dest) {
     state.position
   ]);
 }
+
 class LoginApp extends Component {
   constructor() {
     super();
@@ -58,25 +60,25 @@ class LoginApp extends Component {
 
     this.onStateChange = event([
       {
-        nativeEvent: ({ state }) =>
-          block([
-            cond(
-              eq(state, State.END),
-              set(this.buttonOpacity, runTiming(new Clock(), 1, 0))
-            )
-          ])
+        nativeEvent: ({state}) =>
+            block([
+              cond(
+                  eq(state, State.END),
+                  set(this.buttonOpacity, runTiming(new Clock(), 1, 0))
+              )
+            ])
       }
     ]);
 
     this.onCloseStateChange = event([
       {
-        nativeEvent: ({ state }) =>
-          block([
-            cond(
-              eq(state, State.END),
-              set(this.buttonOpacity, runTiming(new Clock(), 0, 1))
-            )
-          ])
+        nativeEvent: ({state}) =>
+            block([
+              cond(
+                  eq(state, State.END),
+                  set(this.buttonOpacity, runTiming(new Clock(), 0, 1))
+              )
+            ])
       }
     ]);
 
@@ -113,102 +115,108 @@ class LoginApp extends Component {
       extrapolate: Extrapolate.CLAMP
     });
   }
+
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: 'white',
-          justifyContent: 'flex-end'
-        }}
-      >
-        <Animated.View
-          style={{
-            ...StyleSheet.absoluteFill,
-            transform: [{ translateY: this.bgY }]
-          }}
-        >
-          <Svg height={height + 50} width={width}>
-
-            <ClipPath id='clip'>
-              <Circle r={height + 50} cx={width / 2} />
-            </ClipPath>
-
-
-            <Image
-              href={require('../assets/wallpaper.jpg')}
-              height={height + 50}
-              width={width}
-              preserveAspectRatio="xMidyMid slice"
-              clipPath="url(#clip)"
-            />
-          </Svg>
-
-        </Animated.View>
-        <View style={{ height: height / 3, justifyContent: 'center' }}>
-          <TapGestureHandler onHandlerStateChange={this.onStateChange}>
-            <Animated.View
-              style={{
-                ...styles.button,
-                opacity: this.buttonOpacity,
-                transform: [{ translateY: this.buttonY }]
-              }}
-            >
-              <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#B7131E' }}>SIGN IN</Text>
-            </Animated.View>
-          </TapGestureHandler>
-          <Animated.View
+        <View
             style={{
-              ...styles.button,
-              backgroundColor: '#2E71DC',
-              opacity: this.buttonOpacity,
-              transform: [{ translateY: this.buttonY }]
+              flex: 1,
+              backgroundColor: 'white',
+              justifyContent: 'flex-end'
             }}
+        >
+          <Animated.View
+              style={{
+                ...StyleSheet.absoluteFill,
+                transform: [{translateY: this.bgY}]
+              }}
           >
-            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-              SIGN IN WITH FACEBOOK
-            </Text>
+            <Svg height={height + 50} width={width}>
+
+              <ClipPath id='clip'>
+                <Circle r={height + 50} cx={width / 2}/>
+              </ClipPath>
+
+
+              <Image
+                  href={require('../assets/wallpaper.jpg')}
+                  height={height + 50}
+                  width={width}
+                  preserveAspectRatio="xMidyMid slice"
+                  clipPath="url(#clip)"
+              />
+            </Svg>
+
           </Animated.View>
-
-          <Animated.View style={{
-            zIndex: this.textInputZindex,
-            opacity: this.textInputOpacity,
-            height: height / 3,
-            transform: [{ translateY: this.textInputY }],
-            ...StyleSheet.absoluteFill,
-            top: null,
-            justifyContent: 'center'
-          }}>
-
-            <TapGestureHandler onHandlerStateChange={this.onCloseStateChange}>
-              <Animated.View style={styles.closeButton}>
-                <Animated.Text style={{ fontSize: 15, color: '#B7131E', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }}>X</Animated.Text>
+          <View style={{height: height / 3, justifyContent: 'center'}}>
+            <TapGestureHandler onHandlerStateChange={this.onStateChange}>
+              <Animated.View
+                  style={{
+                    ...styles.button,
+                    opacity: this.buttonOpacity,
+                    transform: [{translateY: this.buttonY}]
+                  }}
+              >
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: '#B7131E'}}>SIGN IN</Text>
               </Animated.View>
             </TapGestureHandler>
-
-            <TextInput
-              placeholder="EMAIL"
-              style={styles.textInput}
-              placeholderTextColor="black"
-            />
-            <TextInput
-              placeholder="PASSWORD"
-              style={styles.textInput}
-              placeholderTextColor="black"
-            />
-
-            <Animated.View style={styles.button}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#B7131E' }}> SIGN IN</Text>
-
+            <Animated.View
+                style={{
+                  ...styles.button,
+                  backgroundColor: '#2E71DC',
+                  opacity: this.buttonOpacity,
+                  transform: [{translateY: this.buttonY}]
+                }}
+            >
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                SIGN IN WITH FACEBOOK
+              </Text>
             </Animated.View>
-          </Animated.View>
+
+            <Animated.View style={{
+              zIndex: this.textInputZindex,
+              opacity: this.textInputOpacity,
+              height: height / 3,
+              transform: [{translateY: this.textInputY}],
+              ...StyleSheet.absoluteFill,
+              top: null,
+              justifyContent: 'center'
+            }}>
+
+              <TapGestureHandler onHandlerStateChange={this.onCloseStateChange}>
+                <Animated.View style={styles.closeButton}>
+                  <Animated.Text style={{
+                    fontSize: 15,
+                    color: '#B7131E',
+                    transform: [{rotate: concat(this.rotateCross, 'deg')}]
+                  }}>X</Animated.Text>
+                </Animated.View>
+              </TapGestureHandler>
+
+              <TextInput
+                  placeholder="EMAIL"
+                  style={styles.textInput}
+                  placeholderTextColor="black"
+              />
+              <TextInput
+                  placeholder="PASSWORD"
+                  style={styles.textInput}
+                  placeholderTextColor="black"
+              />
+
+              <Animated.View style={styles.button}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: '#B7131E'}}> SIGN IN</Text>
+
+              </Animated.View>
+            </Animated.View>
 
 
+          </View>
         </View>
-      </View>
     );
   }
 }
+
 export default LoginApp;
 
 const styles = StyleSheet.create({
@@ -239,7 +247,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -20,
     left: width / 2 - 20,
-    shadowOffset: { width: 2, height: 2 },
+    shadowOffset: {width: 2, height: 2},
     shadowColor: '#B7131E',
     shadowOpacity: 0.2
   },

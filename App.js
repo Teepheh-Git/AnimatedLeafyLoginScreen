@@ -1,63 +1,61 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Asset } from 'expo-asset';
+import {StyleSheet, Text, View} from 'react-native';
+import {Asset} from 'expo-asset';
 import AppLoading from 'expo-app-loading';
 import LoginApp from './app/index';
 
 
 function cacheImages(images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
+    return images.map(image => {
+        if (typeof image === 'string') {
+            return Image.prefetch(image);
+        } else {
+            return Asset.fromModule(image).downloadAsync();
+        }
+    });
 }
 
 
 export default class App extends React.Component {
-  constructor() {
-  super();
-  this.
-  state = {
-    isReady: false
-  };
-  }
-
-
-  async _loadAssetsAsync() {
-    const imageAssets = cacheImages([require('./assets/wallpaper.jpg')]);
-    await Promise.all([...imageAssets]);
-  }
-
-  render() {
-    if (!this.state.isReady) {
-      return (
-        <AppLoading
-          startAsync={this._loadAssetsAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
-      );
+    constructor() {
+        super();
+        this.state = {
+            isReady: false
+        };
     }
 
-    return (
-      <LoginApp />
 
-    )
+    async _loadAssetsAsync() {
+        const imageAssets = cacheImages([require('./assets/wallpaper.jpg')]);
+        await Promise.all([...imageAssets]);
+    }
+
+    render() {
+        if (!this.state.isReady) {
+            return (
+                <AppLoading
+                    startAsync={this._loadAssetsAsync}
+                    onFinish={() => this.setState({isReady: true})}
+                    onError={console.warn}
+                />
+            );
+        }
+
+        return (
+            <LoginApp/>
+
+        )
 
 
-
-  }
+    }
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
